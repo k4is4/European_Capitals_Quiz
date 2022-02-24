@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}Flashcard{% endblock %}
+
+{% block content %}
+<nav class="menu">
+    <a href="{{ url_for('welcome') }}">Home</a>
+</nav>
+<h1 class="question">
+    What is the capital of {{ index }}?
+</h1>
+<form method="post">
+    <input type="text" name="answer">
+    <button type="submit">SUBMIT</button>
+</form>
+{% endblock %}

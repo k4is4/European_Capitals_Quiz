@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block title %}Welcome{% endblock %}
+
+{% block content %}
+<h1>How well do you know the European capitals?</h1>
+<p>
+    <button id="start_button">
+        <a href="{{ url_for('flashcard', country=index) }}">START QUIZ</a>
+    </button>
+</p>
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}Highscore{% endblock %}
+
+{% block content %}
+<nav class="menu">
+    <a href="{{ url_for('welcome') }}">Home</a>
+</nav>
+
+<h1>Highscores</h1>
+
+<p>
+    {% for item in scores %}
+<p>
+    {{ item[0] }} {{ (20 - item[0]|length) * "_" }} {{ item[1] }}
+</p>
+{% endfor %}
+</p>
+<p>
+    <button>
+        <a href="{{ url_for('welcome') }}">BACK TO START</a>
+    </button>
+</p>
+{% endblock %}

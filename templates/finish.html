@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %}Finish{% endblock %}
+
+{% block content %}
+<nav class="menu">
+    <a href="{{ url_for('welcome') }}">Home</a>
+</nav>
+<p>
+    Your score: {{ score }}/{{ max_score }}
+</p>
+
+{% if highscore %}
+<h1>Congratulations!</h1>
+<p>You made it to the Top 10!</p>
+<p>
+<form method="post" id="highscore_form">
+    <input type="text" name="name" placeholder="Anonymous" maxlength="10">
+    <button type="submit">SAVE SCORE</button>
+</form>
+</p>
+{% else %}
+<p>
+    <button>
+        <a href="{{ url_for('welcome') }}">BACK TO START</a>
+    </button>
+</p>
+{% endif %}
+
+{% endblock %}

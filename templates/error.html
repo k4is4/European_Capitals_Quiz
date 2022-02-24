@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}Error{% endblock %}
+
+{% block content %}
+<nav class="menu">
+    <a href="{{ url_for('welcome') }}">Home</a>
+</nav>
+<p>
+    Something went wrong! Make sure you start the quiz from the beginning.
+</p>
+<p>
+    <button>
+        <a href="{{ url_for('welcome') }}">BACK TO START</a>
+    </button>
+</p>
+{% endblock %}
