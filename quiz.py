@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, session, redirect, url_for
+from flask import Flask, render_template, request, session, redirect, url_for, flash
 import random
 from flask_pymongo import PyMongo
 import uuid
@@ -22,20 +22,22 @@ def welcome():
     session["sess_id"] = unique_id
     session[unique_id + "counter"] = 0
     session[unique_id + "countries"] = countries
-    return render_template("welcome.html", index=next_country)
+    session[unique_id + "country"] = next_country
+    return render_template("welcome.html")
 
-@app.route("/flashcard/<string:country>", methods=["GET", "POST"])
-def flashcard(country):
-    """Show the Question page for GET requests. For POST requests check the user's answer and return the Result page."""
+@app.route("/flashcard/", methods=["GET", "POST"])
+def flashcard():
+    """Show the Question page for a GET request. For POST requests check the user's answer and return the Question page for the next coutry."""
     if "sess_id" in session:
         unique_id = session["sess_id"]
         counter = session[unique_id + "counter"]
         countries = session[unique_id + "countries"]
+        country = session[unique_id + "country"]
         if request.method == "GET":
-            if country not in countries: # Check if the user is trying to use URL to access a flashcard again
+            if country not in countries:
                 return redirect(url_for("error"))
             else:
-                return render_template("flashcard.html", index=country.title())
+                return render_template("flashcard.html", country=country.title())
         else:
             capital = flashcards[country]
             countries.remove(country)
@@ -49,8 +51,10 @@ def flashcard(country):
             session[unique_id + "counter"] = counter
             result = "Correct!"
         else:
-            result = "Wrong."    
-        return render_template("flashcard_result.html", result=result, country=country.title(), capital=capital.title(), index=next_country)
+            result = "Wrong."
+        flash(f"{result} The capital of {country.title()} is {capital.title()}.")
+        session[unique_id + "country"] = next_country
+        return render_template("flashcard.html", country=next_country.title())
     else:
         return redirect(url_for("error"))
 
