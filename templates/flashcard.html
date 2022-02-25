@@ -6,11 +6,27 @@
 <nav class="menu">
     <a href="{{ url_for('welcome') }}">Home</a>
 </nav>
+
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+{% for message in messages %}
+<p>{{ message }}</p>
+{% endfor %}
+{% endif %}
+{% endwith %}
+
+{% if country == "Finish" %}
+<button>
+    <a href="{{ url_for('finish') }}">FINISH QUIZ</a>
+</button>
+{% else %}
 <h1 class="question">
-    What is the capital of {{ index }}?
+    What is the capital of {{ country }}?
 </h1>
 <form method="post">
-    <input type="text" name="answer">
+    <input type="text" name="answer" autofocus>
     <button type="submit">SUBMIT</button>
 </form>
+{% endif %}
+
 {% endblock %}
