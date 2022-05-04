@@ -4,7 +4,7 @@ I made this quiz in order to practice Flask and MongoDB. Both the high scores an
 
 # How To Play
 
-- You can take the quiz at kaisaweb.pythonanywhere.com. 
+You can take the quiz at kaisaweb.pythonanywhere.com. 
 - Click START QUIZ to start.
 - Type in the capital of the country in question and click SUBMIT or you can press Enter to submit your answer.
 - After submitting, a new question will appear. At the top of the page you will also see the correct answer for the previous question.
